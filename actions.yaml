@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: Research Design Actions
+  description: Aktionen für den benutzerdefinierten GPT, um Zusammenfassungen zu erstellen, Quizfragen zu generieren und Literaturhinweise zu geben.
+  version: 1.0.0
+paths:
+  /summarize:
+    post:
+      summary: Erstelle eine Zusammenfassung
+      description: Generiert eine Zusammenfassung zu einem bestimmten Thema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  type: string
+                  description: Das Thema, zu dem eine Zusammenfassung erstellt werden soll.
+      responses:
+        200:
+          description: Erfolgreiche Antwort mit der Zusammenfassung.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  summary:
+                    type: string
+                    description: Die generierte Zusammenfassung.
+  /quiz:
+    post:
+      summary: Generiere Quizfragen
+      description: Erstellt Quizfragen zu einem bestimmten Thema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  type: string
+                  description: Das Thema für die Quizfragen.
+                questionCount:
+                  type: integer
+                  description: Die Anzahl der Fragen.
+      responses:
+        200:
+          description: Erfolgreiche Antwort mit den Quizfragen.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        question:
+                          type: string
+                          description: Die Frage.
+                        options:
+                          type: array
+                          items:
+                            type: string
+                          description: Antwortmöglichkeiten.
+                        correctAnswer:
+                          type: string
+                          description: Die richtige Antwort.
